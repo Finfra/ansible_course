@@ -1,9 +1,0 @@
----
-- name: 02.AdHoc_vs_Playbook
-  hosts: 
-    - "*"
-  tasks:
-    - shell: whoami
-      register: p
-
-    - debug: var=p.stdout_lines      

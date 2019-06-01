@@ -1,6 +1,0 @@
-- name: httpd is started
-  service:
-    name: "{{ service_name }}"
-    state: "{{ state }}"
-    enabled: true
-
