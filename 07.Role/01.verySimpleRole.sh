@@ -11,9 +11,9 @@ echo ---------------------------------------------------------------------------
 read -p "<< press enter, or cancel to ctl+c >>" ok
 
 echo --------------------------------------------------------------------------------
-echo ansible-playbook -i ./$prj/hosts ./$prj/site.yml
+echo ansible-playbook -i ./$prj/hosts.ini ./$prj/site.yml
 echo --------------------------------------------------------------------------------
-ansible-playbook -i ./$prj/hosts ./$prj/site.yml
+ansible-playbook -i ./$prj/hosts.ini ./$prj/site.yml
 echo --------------------------------------------------------------------------------
 echo --------------------------------------------------------------------------------
 echo curl n3
