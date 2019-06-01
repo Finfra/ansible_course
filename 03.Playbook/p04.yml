@@ -1,0 +1,8 @@
+---
+- name: syntax-check
+  hosts: 
+    - "*"
+  tasks:
+    - shell: whoami
+      register: p
+    - debug: var=p.stdout_lines      

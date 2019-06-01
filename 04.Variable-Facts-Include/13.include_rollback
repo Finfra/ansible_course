@@ -1,0 +1,39 @@
+cat <<EOF> site_rollback.yml
+---
+- name : uninstall install and delete file
+  hosts : web
+  tasks:
+    - name: httpd package is present
+      yum :
+        name: httpd
+        state: absent
+
+    - name: remove index.html
+      file:
+        path: /var/www/html/index.html
+        state: absent
+- name : test intranet web server
+  hosts: n2
+  become: no
+
+  tasks:
+    - name: connect to intranet web server
+      uri:
+         url: http://n1
+         status_code: 200
+
+EOF
+
+echo --------------------------------------------------------------------------------
+echo 'ansible-playbook site_rollback.yml'
+echo 'n2                         : ok=4    changed=0    unreachable=0    failed=1'
+echo --------------------------------------------------------------------------------
+ansible-playbook site_rollback.yml
+echo --------------------------------------------------------------------------------
+
+echo --------------------------------------------------------------------------------
+echo 'curl n2 : Connection refused is good.'
+echo --------------------------------------------------------------------------------
+curl n2
+echo --------------------------------------------------------------------------------
+

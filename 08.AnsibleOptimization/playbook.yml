@@ -1,0 +1,31 @@
+- hosts: n1
+  tasks:
+  - yum :
+      name: tree
+      state: latest
+    async: 10
+    pool: 2
+    register: yum_sleep
+  - name: wait for yum install
+    async_status:
+      jid: "{{ yum_sleep }}"
+    register: job_result
+    until: yum_sleep.finished
+    retries: 20
+
+  - name: reboot server
+    command: 'shutdown -r +1 "Ansible updates triggered"'
+    async: 1
+    poll: 2
+    ignore_errors: true
+    when: job_result.finished
+  - name: wait for webserver to restart
+    wait_for:
+      host: n1
+      port: 22
+      state: started
+      delay: 80
+      timeout: 200
+    become: False
+    delegate_to: 127.0.0.1
+  #   when: yuminstalltree.changed

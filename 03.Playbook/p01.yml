@@ -1,0 +1,6 @@
+---
+- name: 01.PlaybookBasic
+  hosts: 
+    - "*"
+  tasks:
+    - ping:

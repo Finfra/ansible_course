@@ -1,0 +1,7 @@
+- hosts: n1
+  tasks:
+  - name: Just show hostname
+    shell: hostname
+    delegate_to: n2
+    register: r
+  - debug: msg={{ r.stdout_lines }}

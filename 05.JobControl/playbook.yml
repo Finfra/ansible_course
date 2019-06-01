@@ -1,0 +1,24 @@
+- name : Special Tags
+  hosts : web
+  tasks:
+    - copy:
+        dest: /tmp/xxaa
+        content: "xxaa"
+    - block:
+      - copy:
+          dest: /tmp/xxbb
+          content: "xxbb"
+      rescue:
+        - shell: "rm -rf /tmp/xxbb warn=no"
+        - copy:
+            dest: /tmp/xxbb
+            content: "xxbb"
+      always:
+        - shell: "ls /tmp/xx*"
+          register: p
+        - debug: var=p.stdout_lines
+
+    - copy:
+        dest: /tmp/xxcc
+        content: "xxcc"
+

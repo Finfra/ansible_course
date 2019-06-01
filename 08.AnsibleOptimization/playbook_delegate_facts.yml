@@ -1,0 +1,9 @@
+- hosts: n1
+  tasks:
+  - name: Facts from a server
+    setup:
+    delegate_to: n2
+    delegate_facts: True
+  - debug: 
+      var: ansible_eth1['ipv4']['address']
+

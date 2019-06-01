@@ -1,0 +1,14 @@
+---
+# This playbook contains common plays that will be run on all nodes.
+
+- name: Install tree. {{ all_test }}
+  yum: 
+    name=tree 
+    state=latest
+  tags: tree
+- name: Install crul. {{ all_test }}
+  yum: 
+    name=curl 
+    state=latest
+  tags: curl
+

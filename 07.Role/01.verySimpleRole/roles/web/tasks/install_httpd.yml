@@ -1,0 +1,11 @@
+---
+- name: Install http and php etc
+  yum: name={{ item }} state=present
+  with_items:
+   - httpd
+   - git
+
+
+- name: http service state
+  service: name=httpd state=started enabled=yes
+
