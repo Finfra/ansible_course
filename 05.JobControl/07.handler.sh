@@ -35,8 +35,8 @@ DocumentRoot "/var/www/html"
 </IfModule>
 EOF
 
-echo hi"> index.html
-echo hello"> i.html
+echo "hi"> index.html
+echo "hello"> i.html
 
 
 cat <<EOF> playbook.yml
